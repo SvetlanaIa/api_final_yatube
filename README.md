@@ -9,7 +9,7 @@
 ### Установка:
 Для установки ПО необходимо установить зависимости
 
-**pip install -r requirement.txt
+**pip install -r requirement.txt**
 
 ### Доступные методы:
 метод                                            | GET | POST | PUT | PATCH | DEL |
@@ -31,9 +31,3 @@ import requests
 api = 'http://localhost:8000/api/v1/posts/'
 headers - {'Authorization': 'Bearer <токен>'}
 request = requests.get(api,headers=headers)
-
-
-
-
- 
-
