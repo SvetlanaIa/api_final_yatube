@@ -26,7 +26,7 @@
 
 ### Примеры:
 
-import requests
+    import requests
 
     api = 'http://localhost:8000/api/v1/posts/'
     headers - {'Authorization': 'Bearer <токен>'}
