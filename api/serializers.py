@@ -9,6 +9,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
         model = Post
+        read_only_fields = ('pub_date',)
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -17,6 +18,7 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
         model = Comment
+        read_only_fields = ('created',)
 
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -27,7 +29,7 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class FollowSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username', read_only=True)
+    user = serializers.SlugRelatedField(slug_field='username', read_only=True)
     following = serializers.SlugRelatedField(slug_field='username', queryset=User.objects.all())
 
     class Meta:
@@ -35,7 +37,8 @@ class FollowSerializer(serializers.ModelSerializer):
         model = Follow
 
     def validate(self, data):
-        follow = Follow.objects.filter(user=self.context['request'].user, following__username=data['following'])
+        follow = Follow.objects.filter(
+            user=self.context['request'].user, following__username=data['following'])
         if follow.exists():
             raise serializers.ValidationError()
         return data

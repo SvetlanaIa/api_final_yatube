@@ -6,14 +6,13 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Comment, Follow, Group, Post
 from .permissions import IsOwnerOrReadOnly
-from .serializers import (
-    CommentSerializer, FollowSerializer, GroupSerializer, PostSerializer)
+from .serializers import (CommentSerializer, FollowSerializer, GroupSerializer, PostSerializer)
 
 
 class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly, ]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['group', ]
 
@@ -48,5 +47,4 @@ class FollowViewSet(ModelViewSet):
     search_fields = ['=user__username', '=following__username', ]
 
     def perform_create(self, serializer):
-        serializer.is_valid(raise_exception=True)
         serializer.save(user=self.request.user)
