@@ -21,7 +21,7 @@
 /api/v1/posts/{post_id}/comments/ | V | V | - | - | - |
 /api/v1/posts/{post_id}/comments/{comment_id}/ | V | - | V | V | V |
 /api/v1/follow/ | V | V | - | - | - |
-/api/v1group/ | V | V | - | - | - |
+/api/v1/group/ | V | V | - | - | - |
 
 
 ### Примеры:
